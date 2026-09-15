@@ -6,262 +6,215 @@
 <title>Countdown to October 14</title>
 <style>
   :root{
-    --flame1:#ff6a00;
-    --flame2:#ffb347;
-    --flame3:#ff2e63;
-    --bg1:#0b0518;
-    --bg2:#1a0b2e;
+    --gold:#e8b84b;
+    --gold-light:#ffe6a8;
+    --maroon:#5a0a12;
+    --maroon-deep:#3a0510;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{
-    height:100%;
-    overflow:hidden;
+    min-height:100%;
     font-family:'Segoe UI', Arial, sans-serif;
-    background:radial-gradient(ellipse at 50% 30%, var(--bg2), var(--bg1) 70%);
+    background:#1a0508;
   }
-  .sky{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-  }
-  .star{
-    position:absolute;
-    background:#fff;
-    border-radius:50%;
-    opacity:.7;
-    animation:twinkle 3s infinite ease-in-out;
-  }
-  @keyframes twinkle{
-    0%,100%{opacity:.2;}
-    50%{opacity:1;}
-  }
-  .ember{
-    position:absolute;
-    bottom:-10px;
-    border-radius:50%;
-    background:radial-gradient(circle, var(--flame2), var(--flame1));
-    opacity:.8;
-    animation:rise linear infinite;
-    filter: blur(0.5px);
-  }
-  @keyframes rise{
-    0%{transform:translateY(0) translateX(0); opacity:.9;}
-    100%{transform:translateY(-110vh) translateX(20px); opacity:0;}
-  }
-
-  .phoenix-wrap{
-    position:absolute;
-    top:20%;
-    left:-300px;
-    width:220px;
-    height:160px;
-    animation:fly 16s linear infinite;
-    filter: drop-shadow(0 0 25px var(--flame1)) drop-shadow(0 0 45px var(--flame3));
-  }
-  @keyframes fly{
-    0%{ left:-300px; top:60%; transform:scale(0.8) rotate(-3deg);}
-    25%{ top:25%; transform:scale(1) rotate(2deg);}
-    50%{ top:45%; transform:scale(1.1) rotate(-2deg);}
-    75%{ top:15%; transform:scale(0.95) rotate(3deg);}
-    100%{ left:110%; top:35%; transform:scale(0.8) rotate(-3deg);}
-  }
-  .wing{
-    transform-origin: 100px 60px;
-    animation: flap 0.5s ease-in-out infinite alternate;
-  }
-  .wing.right{
-    transform-origin: 100px 60px;
-    animation: flapR 0.5s ease-in-out infinite alternate;
-  }
-  @keyframes flap{
-    0%{transform:rotate(-18deg) scaleY(1);}
-    100%{transform:rotate(10deg) scaleY(0.9);}
-  }
-  @keyframes flapR{
-    0%{transform:rotate(18deg) scaleY(1);}
-    100%{transform:rotate(-10deg) scaleY(0.9);}
-  }
-  .tailflame{
-    animation: flicker 0.4s ease-in-out infinite alternate;
-    transform-origin: 40px 80px;
-  }
-  @keyframes flicker{
-    0%{opacity:.85; transform:scale(1) translateX(0);}
-    100%{opacity:1; transform:scale(1.08) translateX(-4px);}
-  }
-
-  .content{
+  .page{
     position:relative;
-    z-index:5;
-    height:100vh;
+    min-height:100vh;
+    width:100%;
+    background-image:url('assets/phoenix-bg.png');
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#fff8f0;
-    padding:20px;
+    justify-content:flex-start;
+    padding: 6vh 5vw 6vh;
+    overflow-x:hidden;
   }
+  .overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(30,3,8,0.35) 0%, rgba(30,3,8,0.15) 35%, rgba(20,2,6,0.55) 70%, rgba(15,1,4,0.75) 100%);
+    pointer-events:none;
+  }
+  .content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:520px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
   h1{
-    font-size:clamp(1.6rem, 4vw, 2.8rem);
+    font-size:clamp(1.5rem, 5vw, 2.3rem);
     letter-spacing:2px;
     text-transform:uppercase;
-    margin-bottom:.3em;
-    background:linear-gradient(90deg, var(--flame2), var(--flame3), var(--flame1));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    text-shadow: 0 0 30px rgba(255,106,0,.3);
+    color:var(--gold-light);
+    text-shadow: 0 0 20px rgba(0,0,0,0.85), 0 2px 4px rgba(0,0,0,0.9);
+    margin-bottom:.2em;
+    font-weight:700;
   }
   .subtitle{
-    color:#d8c8e8;
-    margin-bottom:2em;
-    font-size:clamp(0.9rem,2vw,1.1rem);
-    letter-spacing:1px;
+    color:#ffe9c7;
+    font-size:clamp(0.85rem, 2.5vw, 1rem);
+    letter-spacing:1.5px;
+    margin-bottom:5vh;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
   }
+
+  /* Temple arch countdown units */
   .timer{
     display:flex;
-    gap:clamp(10px,3vw,30px);
-    flex-wrap:wrap;
+    gap:clamp(8px, 2.5vw, 18px);
     justify-content:center;
+    flex-wrap:wrap;
+    margin-top:auto;
   }
   .unit{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,150,60,0.35);
-    backdrop-filter: blur(6px);
-    border-radius:16px;
-    padding:18px clamp(14px,3vw,28px);
-    min-width:90px;
-    box-shadow: 0 0 25px rgba(255,80,0,0.15), inset 0 0 15px rgba(255,120,0,0.08);
+    position:relative;
+    width:clamp(64px, 18vw, 92px);
+    padding-top:clamp(22px, 6vw, 30px);
   }
-  .unit .num{
-    font-size:clamp(1.8rem,5vw,3rem);
+  .temple-shape{
+    background:linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    border:2px solid var(--gold);
+    border-radius: 50% 50% 8px 8px / 35% 35% 8px 8px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.6), inset 0 0 12px rgba(232,184,75,0.15);
+    padding: clamp(14px,4vw,20px) 4px clamp(10px,3vw,14px);
+    position:relative;
+  }
+  .temple-shape::before{
+    content:'';
+    position:absolute;
+    top:-10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:8px;
+    height:8px;
+    background:var(--gold);
+    border-radius:50%;
+    box-shadow: 0 0 8px var(--gold);
+  }
+  .temple-shape::after{
+    content:'';
+    position:absolute;
+    bottom:6px;
+    left:8%;
+    right:8%;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:.6;
+  }
+  .num{
+    font-size:clamp(1.4rem, 5.5vw, 2.1rem);
     font-weight:700;
-    color:#ffdfba;
-    text-shadow:0 0 15px rgba(255,140,0,0.6);
+    color:var(--gold-light);
+    text-shadow:0 0 12px rgba(232,184,75,0.55);
     font-variant-numeric: tabular-nums;
+    display:block;
   }
-  .unit .label{
-    margin-top:6px;
-    font-size:.75rem;
+  .label{
+    margin-top:8px;
+    font-size:.65rem;
     letter-spacing:2px;
     text-transform:uppercase;
-    color:#c9a8d6;
+    color:#f1d9a8;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
   }
+
   .target-date{
-    margin-top:2em;
-    font-size:.95rem;
-    color:#f0c9a0;
+    margin-top:2.5em;
+    font-size:.85rem;
+    color:#f5deb0;
     letter-spacing:1px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
   }
+
+  .cta-btn{
+    margin-top:2.2em;
+    padding: 14px 42px;
+    font-size:clamp(0.85rem, 2.5vw, 1rem);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--maroon-deep);
+    background:linear-gradient(180deg, var(--gold-light), var(--gold));
+    border:2px solid #fff3d6;
+    border-radius:30px;
+    cursor:pointer;
+    box-shadow: 0 0 20px rgba(232,184,75,0.55), 0 4px 12px rgba(0,0,0,0.5);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .cta-btn:hover{
+    transform:translateY(-2px) scale(1.03);
+    box-shadow: 0 0 30px rgba(232,184,75,0.8), 0 6px 16px rgba(0,0,0,0.55);
+  }
+  .cta-btn:active{
+    transform:translateY(0) scale(0.98);
+  }
+
   .done{
-    font-size:clamp(1.5rem,4vw,2.5rem);
-    color:#ffdfba;
-    text-shadow:0 0 30px var(--flame1);
+    font-size:clamp(1.3rem,4vw,2rem);
+    color:var(--gold-light);
+    text-shadow:0 0 24px rgba(232,184,75,0.7);
+  }
+
+  @media (max-width: 420px){
+    .page{ padding: 5vh 4vw 5vh; }
+    .timer{ gap:8px; }
   }
 </style>
 </head>
 <body>
 
-<div class="sky" id="sky"></div>
+<div class="page">
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>Rise of the Moment</h1>
+    <div class="subtitle">Countdown to October 14 &middot; 10:30 AM</div>
 
-<div class="phoenix-wrap" id="phoenix">
-  <svg viewBox="0 0 200 140" width="220" height="160">
-    <defs>
-      <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ffd27a"/>
-        <stop offset="50%" stop-color="#ff8a2b"/>
-        <stop offset="100%" stop-color="#ff2e63"/>
-      </linearGradient>
-      <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#ffdca0"/>
-        <stop offset="40%" stop-color="#ff8a2b"/>
-        <stop offset="100%" stop-color="#d81159"/>
-      </linearGradient>
-      <linearGradient id="flameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#ff2e63" stop-opacity="0"/>
-        <stop offset="60%" stop-color="#ff6a00"/>
-        <stop offset="100%" stop-color="#ffd27a"/>
-      </linearGradient>
-    </defs>
+    <div class="timer" id="timer">
+      <div class="unit">
+        <div class="temple-shape">
+          <span class="num" id="days">00</span>
+        </div>
+        <div class="label">Days</div>
+      </div>
+      <div class="unit">
+        <div class="temple-shape">
+          <span class="num" id="hours">00</span>
+        </div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="unit">
+        <div class="temple-shape">
+          <span class="num" id="minutes">00</span>
+        </div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="unit">
+        <div class="temple-shape">
+          <span class="num" id="seconds">00</span>
+        </div>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
 
-    <!-- tail flame -->
-    <g class="tailflame">
-      <path d="M60,70 C30,60 10,75 2,80 C15,82 30,88 45,92 C25,95 10,105 5,112 C25,110 45,108 62,98 Z" fill="url(#flameGrad)"/>
-    </g>
+    <div class="target-date" id="targetLabel"></div>
 
-    <!-- left wing -->
-    <g class="wing">
-      <path d="M100,60 C70,40 40,20 15,25 C35,35 45,50 55,65 C35,60 15,62 5,70 C30,75 50,85 70,88 C55,90 40,95 32,102 C55,100 78,92 100,75 Z" fill="url(#wingGrad)"/>
-    </g>
-
-    <!-- right wing -->
-    <g class="wing right">
-      <path d="M100,60 C130,40 160,20 185,25 C165,35 155,50 145,65 C165,60 185,62 195,70 C170,75 150,85 130,88 C145,90 160,95 168,102 C145,100 122,92 100,75 Z" fill="url(#wingGrad)"/>
-    </g>
-
-    <!-- body -->
-    <ellipse cx="105" cy="65" rx="22" ry="14" fill="url(#bodyGrad)"/>
-    <!-- neck -->
-    <path d="M120,58 C132,50 142,42 148,32" stroke="url(#bodyGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
-    <!-- head -->
-    <circle cx="151" cy="28" r="8" fill="url(#bodyGrad)"/>
-    <!-- beak -->
-    <path d="M158,27 L168,25 L158,32 Z" fill="#ffdfba"/>
-    <!-- crest -->
-    <path d="M148,20 C150,12 154,6 160,3 C156,10 156,16 155,21 Z" fill="#ffd27a"/>
-    <path d="M144,19 C144,10 146,4 150,0 C148,8 149,14 149,20 Z" fill="#ff8a2b"/>
-    <!-- eye -->
-    <circle cx="153" cy="27" r="1.6" fill="#3a0d0d"/>
-  </svg>
-</div>
-
-<div class="content">
-  <h1>Rise of the Moment</h1>
-  <div class="subtitle">Countdown to October 14 &middot; 10:30 AM</div>
-  <div class="timer" id="timer">
-    <div class="unit"><div class="num" id="days">00</div><div class="label">Days</div></div>
-    <div class="unit"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
-    <div class="unit"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
-    <div class="unit"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
+    <button class="cta-btn" id="comingSoonBtn">Coming Soon</button>
   </div>
-  <div class="target-date" id="targetLabel"></div>
 </div>
 
 <script>
-  // Build the starfield
-  const sky = document.getElementById('sky');
-  const starCount = 80;
-  for(let i=0;i<starCount;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random()*2 + 1;
-    s.style.width = size+'px';
-    s.style.height = size+'px';
-    s.style.left = Math.random()*100+'vw';
-    s.style.top = Math.random()*100+'vh';
-    s.style.animationDelay = (Math.random()*3)+'s';
-    sky.appendChild(s);
-  }
-  // Embers rising
-  const emberCount = 25;
-  for(let i=0;i<emberCount;i++){
-    const e = document.createElement('div');
-    e.className = 'ember';
-    const size = Math.random()*4 + 2;
-    e.style.width = size+'px';
-    e.style.height = size+'px';
-    e.style.left = Math.random()*100+'vw';
-    e.style.animationDuration = (Math.random()*6+5)+'s';
-    e.style.animationDelay = (Math.random()*6)+'s';
-    sky.appendChild(e);
-  }
-
-  // Determine next Oct 14 10:30 AM (local time)
   function getTargetDate(){
     const now = new Date();
     let year = now.getFullYear();
-    let target = new Date(year, 9, 14, 10, 30, 0); // month is 0-indexed: 9 = October
+    let target = new Date(year, 9, 14, 10, 30, 0); // October (0-indexed month)
     if(target.getTime() <= now.getTime()){
       target = new Date(year+1, 9, 14, 10, 30, 0);
     }
@@ -300,6 +253,11 @@
 
   update();
   const interval = setInterval(update, 1000);
+
+  document.getElementById('comingSoonBtn').addEventListener('click', function(){
+    this.textContent = 'Stay Tuned!';
+    setTimeout(()=>{ this.textContent = 'Coming Soon'; }, 1500);
+  });
 </script>
 
 </body>
